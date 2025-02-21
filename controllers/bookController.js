@@ -5,7 +5,7 @@ mongoose.set("toJSON", { virtuals: true });
 
 const getBook = async (req, res) => {
     try {
-        const foundBook = await Book.findById(req.params._id).exec();
+        const foundBook = await Book.findById(req.params.id).exec();
         res.json(foundBook);
     } catch (err) {
         res.send("no book exists");
@@ -38,7 +38,7 @@ const postComment = async (req, res) => {
         }
 
         const bookToUpdate = Book.findByIdAndUpdate(
-            req.params._id,
+            req.params.id,
             {
                 $push: { comments: req.body.comment },
             },
@@ -52,7 +52,7 @@ const postComment = async (req, res) => {
 
 const deleteBook = async (req, res) => {
     try {
-        await Book.findByIdAndDelete(req.params._id);
+        await Book.findByIdAndDelete(req.params.id);
         res.send("delete successful");
     } catch (err) {
         res.send("no book exists");
