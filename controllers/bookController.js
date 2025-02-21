@@ -5,7 +5,8 @@ mongoose.set("toJSON", { virtuals: true });
 
 const getBook = async (req, res) => {
     try {
-        const foundBook = await Book.findById(req.params.id).exec();
+        const foundBook = await Book.findById(req.params.id);
+        if (!foundBook) throw new Error();
         res.json(foundBook);
     } catch (err) {
         res.send("no book exists");
@@ -14,7 +15,7 @@ const getBook = async (req, res) => {
 
 const getBooks = async (req, res) => {
     try {
-        const foundBooks = await Book.find({}).exec();
+        const foundBooks = await Book.find({});
         res.json(foundBooks);
     } catch (err) {
         res.status(500).json({ error: "server error" });
@@ -33,7 +34,7 @@ const postBook = async (req, res) => {
 
 const postComment = async (req, res) => {
     try {
-        if (req.body.comment === "") {
+        if (!req.body.comment) {
             return res.send("missing required field comment");
         }
 
@@ -44,6 +45,9 @@ const postComment = async (req, res) => {
             },
             { new: true }
         );
+
+        if (!bookToUpdate) throw new Error();
+
         res.json(bookToUpdate);
     } catch (err) {
         res.send("no book exists");
@@ -52,7 +56,10 @@ const postComment = async (req, res) => {
 
 const deleteBook = async (req, res) => {
     try {
-        await Book.findByIdAndDelete(req.params.id);
+        const bookToDelete = await Book.findByIdAndDelete(
+            req.params.id
+        );
+        if (!bookToDelete) throw new Error();
         res.send("delete successful");
     } catch (err) {
         res.send("no book exists");
