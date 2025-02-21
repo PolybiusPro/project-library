@@ -37,7 +37,7 @@ const postComment = async (req, res) => {
             return res.send("missing required field comment");
         }
 
-        const bookToUpdate = Book.findByIdAndUpdate(
+        const bookToUpdate = await Book.findByIdAndUpdate(
             req.params.id,
             {
                 $push: { comments: req.body.comment },
