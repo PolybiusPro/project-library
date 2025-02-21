@@ -80,7 +80,7 @@ suite("Functional Tests", function () {
                         .end((err, res) => {
                             assert.strictEqual(res.status, 200);
                             assert.strictEqual(
-                                res.body,
+                                res.text,
                                 "missing required field title"
                             );
                             done();
@@ -118,7 +118,7 @@ suite("Functional Tests", function () {
                         .end((err, res) => {
                             assert.strictEqual(res.status, 200);
                             assert.strictEqual(
-                                res.body,
+                                res.text,
                                 "no book exists"
                             );
                             done();
@@ -176,7 +176,7 @@ suite("Functional Tests", function () {
                         .end((err, res) => {
                             assert.strictEqual(res.status, 200);
                             assert.strictEqual(
-                                res.body,
+                                res.text,
                                 "missing required field comment"
                             );
                             done();
@@ -193,7 +193,7 @@ suite("Functional Tests", function () {
                         .end((err, res) => {
                             assert.strictEqual(res.status, 200);
                             assert.strictEqual(
-                                res.body,
+                                res.text,
                                 "no book exists"
                             );
                             done();
@@ -212,7 +212,7 @@ suite("Functional Tests", function () {
                         .end((err, res) => {
                             assert.strictEqual(res.status, 200);
                             assert.strictEqual(
-                                res.body,
+                                res.text,
                                 "complete delete successful"
                             );
                             done();
@@ -226,7 +226,7 @@ suite("Functional Tests", function () {
                         .end((err, res) => {
                             assert.strictEqual(res.status, 200);
                             assert.strictEqual(
-                                res.body,
+                                res.text,
                                 "no book exists"
                             );
                             done();
