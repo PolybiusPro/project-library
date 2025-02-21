@@ -25,6 +25,7 @@ const postBook = async (req, res) => {
     try {
         const newBook = new Book({ title: req.body.title });
         await newBook.save();
+        res.json(newBook);
     } catch (err) {
         res.send("missing required field title");
     }
