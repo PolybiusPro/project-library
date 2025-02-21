@@ -131,7 +131,7 @@ suite("Functional Tests", function () {
                         .get("/api/books/" + testId)
                         .end((err, res) => {
                             assert.strictEqual(res.status, 200);
-                            assert.property("_id");
+                            assert.property(res.body, "_id");
                             assert.strictEqual(
                                 res.body.title,
                                 "The Giver"
@@ -150,7 +150,7 @@ suite("Functional Tests", function () {
                 test("Test POST /api/books/[id] with comment", function (done) {
                     chai.request(server)
                         .keepOpen()
-                        .post("/api/books" + testId)
+                        .post("/api/books/" + testId)
                         .send({ comment: "Great Book 10/10" })
                         .end((err, res) => {
                             assert.strictEqual(res.status, 200);
@@ -171,7 +171,7 @@ suite("Functional Tests", function () {
                 test("Test POST /api/books/[id] without comment field", function (done) {
                     chai.request(server)
                         .keepOpen()
-                        .post("/api/books" + testId)
+                        .post("/api/books/" + testId)
                         .send({ comment: "" })
                         .end((err, res) => {
                             assert.strictEqual(res.status, 200);
@@ -213,7 +213,7 @@ suite("Functional Tests", function () {
                             assert.strictEqual(res.status, 200);
                             assert.strictEqual(
                                 res.text,
-                                "complete delete successful"
+                                "delete successful"
                             );
                             done();
                         });
